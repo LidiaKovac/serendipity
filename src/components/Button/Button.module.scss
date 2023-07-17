@@ -1,0 +1,16 @@
+@import "../../style/color";
+button.btn {
+  background-color: #ffe3c4;
+  border: none;
+  border: #fcbc74 4px solid;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 39px;
+  color: $text;
+  width: 50%;
+  transition: .1s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

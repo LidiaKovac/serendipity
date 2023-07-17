@@ -1,0 +1,75 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Yoga",
+      "duration": 30,
+      "level": 1,
+      "description": "Scopri la gioia dello yoga in uno spazio accogliente! Abbraccia il tuo unico percorso con il nostro corso di yoga positivo per principianti. Potenziando mente, corpo e anima.",
+      "img": "src/assets/courses/img1.png"
+    },
+    {
+      "id": 2,
+
+      "title": "Forza",
+      "duration": 30,
+      "level": 2,
+      "description": "Potenzia il tuo corpo e la tua mente con il nostro allenamento di forza! Abbraccia tutte le capacità e il progresso. Unisciti a noi per costruire forza, fiducia e amore per te stesso/a. Rompiamo gli stereotipi e prosperiamo insieme!",
+      "img": "src/assets/courses/img2.png"
+    },
+    {
+      "id": 3,
+
+      "title": "Pilates",
+      "duration": 20,
+      "level": 2,
+      "description": "Scopri il potere trasformativo del Pilates! Le nostre lezioni body-positive promuovono l'amore e l'accettazione di sé. Abbraccia la tua unicità mentre ci rafforziamo, tonifichiamo e ci eleviamo insieme. Unisciti ora per vivere il Pilates come mai prima d'ora! ",
+      "img": "src/assets/courses/img3.png"
+    },
+    {
+      "id": 4,
+
+      "title": "Stretching",
+      "duration": 10,
+      "level": 1,
+      "description": "Abbraccia la bellezza dello stretching con la nostra routine body-positive! Coltiva la gentilezza verso te stesso/a onorando il tuo corpo e la tua mente. Aumenta la flessibilità, sciogli le tensioni e celebra il tuo percorso unico. Unisciti ora per un'esperienza liberatoria e potenziante!",
+      "img": "src/assets/courses/img4.png"
+    },
+    {
+      "id": 5,
+
+      "title": "Dance it out!",
+      "duration": 45,
+      "level": 3,
+      "description": "Unisciti a noi per un divertente e inclusivo allenamento di danza che celebra ciò che il tuo corpo può fare! Questo allenamento è pensato per aiutarti a sentirti sicur*, forte e bell* nella tua pelle.",
+      "img": "src/assets/courses/img5.png"
+    },
+    {
+      "id": 6,
+
+      "title": "Stretching",
+      "duration": 30,
+      "level": 2,
+      "description": "Porta il tuo stretching ad un livello superiore con la nostra routine body-positive per utenti intermedi! Abbraccia i tuoi progressi e la tua unicità mentre aumenti la flessibilità e l'armonia interiore. Celebriamo insieme ogni passo di questo percorso!",
+      "img": "src/assets/courses/img6.png"
+    },
+    {
+      "id": 7,
+
+      "title": "Forza",
+      "duration": 60,
+      "level": 3,
+      "description": "Potenzia il tuo percorso con il nostro allenamento di forza body-positive per utenti intermedi! Abbraccia la tua unicità e celebra le tue abilità. Cresciamo insieme!",
+      "img": "src/assets/courses/img7.png"
+    },
+    {
+      "id": 8,
+
+      "title": "Dance it out!",
+      "duration": 60,
+      "level": 3,
+      "description": "Celebriamo la diversità e l'autenticità di ogni corpo, ballando con gioia e senza giudizio. Scopri il potere liberatorio della danza mentre esprimi te stesso/a e ti diverti.",
+      "img": "src/assets/courses/img8.png"
+    }
+  ]
+}
