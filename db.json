@@ -130,6 +130,11 @@
       "courseId": 6,
       "userId": 1,
       "id": 10
+    },
+    {
+      "courseId": 1,
+      "userId": 2,
+      "id": 11
     }
   ]
 }
