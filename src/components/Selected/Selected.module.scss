@@ -66,3 +66,39 @@
     }
   }
 }
+@media screen and (max-width: 1100px) {
+  .courses__selected {
+    display: none;
+  }
+  .modal__backdrop,
+  .modal {
+    display: flex !important;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+
+    .selected__commands {
+      button {
+        width: 95%;
+        border-width: 3px !important;
+        svg {
+          width: 50% !important;
+          height: 50% !important;
+        }
+      }
+    }
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .selected__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      .selected__commands {
+        flex-direction: row !important;
+        width: 100% !important;
+      }
+    }
+  }

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 
 import style from "./Courses.module.scss"
 import { useNavigate } from "react-router-dom"
-import { getUserId } from "../../utils"
 import { Selected } from "../../components/Selected/Selected"
 export const Courses = () => {
   const navigate = useNavigate()
@@ -16,7 +15,7 @@ export const Courses = () => {
     ) as User | null
     console.log(ls)
     if (!ls) {
-      navigate("/signup")
+      navigate("/signin")
     }
     fetch("http://localhost:3000/courses")
       .then((res) => res.json())
@@ -39,8 +38,8 @@ export const Courses = () => {
             />
           ))}
         </div>
-          {selected &&  <Selected selected={selected}/>} 
-    </div>
+        {selected && <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal}  updateFavs={() => { return }} selected={selected} />}
+      </div>
     </div>
   )
 }

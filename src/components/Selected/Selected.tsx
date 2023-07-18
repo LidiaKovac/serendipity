@@ -7,8 +7,13 @@ import { Modal } from "../../components/Modal/Modal"
 import { getUserId } from "../../utils"
 import { useEffect, useState } from "react"
 
-
-export const Selected = ({ selected, updateFavs }: { selected: Course, updateFavs: () => void }) => {
+interface Props {
+    selected: Course, 
+    updateFavs: ()=> void 
+    isModalOpen: boolean 
+    setOpenModal: (status:boolean)=> void
+}
+export const Selected = ({ selected, updateFavs, isModalOpen, setOpenModal }: Props) => {
     const [rawFavs, setRawFavs] = useState<Fav[]>([])
     const fetchFavs = async () => {
         const userId = getUserId()
@@ -38,7 +43,7 @@ export const Selected = ({ selected, updateFavs }: { selected: Course, updateFav
         return rawFavs.some(crs => crs.courseId === id)
     }
     const removeFav = () => {
-        fetch(`http://localhost:3000/favourites?userId=${getUserId()}&courseId=${selected!.id}`)
+        fetch(`http://localhost:3000/favourites?userId=${getUserId()}&courseId=${selected.id}`)
             .then(res => res.json())
             .then((fav: Fav[]) => {
                 console.log(fav)
@@ -51,7 +56,6 @@ export const Selected = ({ selected, updateFavs }: { selected: Course, updateFav
             }).catch(err => console.error(err))
     }
 
-    const [isModalOpen, setOpenModal] = useState<boolean>(true)
 
     return (<>
         <div className={style["courses__selected"]}>

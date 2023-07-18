@@ -38,7 +38,7 @@ export const Favourites = () => {
     ) as Auth | null
     console.log(ls)
     if (!ls) {
-      navigate("/signup")
+      navigate("/signin")
     } else {
       fetchFavs().finally(() => console.log("done"))
     }
@@ -61,7 +61,7 @@ export const Favourites = () => {
             />
           ))}
         </div>
-        {selected && <Selected updateFavs={() => { setSelected(null); fetchFavs().finally(() => console.log("done")) }} selected={selected} />}
+        {selected && <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal} updateFavs={() => { setSelected(null); fetchFavs().finally(() => console.log("done")) }} selected={selected} />}
       </div>
     </div>
   )
