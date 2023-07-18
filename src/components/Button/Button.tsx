@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom"
 import style from "./Button.module.scss"
-export const Button = ({ content, location }: { content: string, location: string }) => {
+interface Props {
+    content: string
+    action?: () => void
+}
+export const Button = ({ content, action }: Props) => {
     return (
-        <Link to={location}>
-            <button className={style["btn"]}>
-                {content}
-            </button>
-        </Link>
+        <button onClick={action} className={style["btn"]}>
+            {content}
+        </button>
     )
 
 }

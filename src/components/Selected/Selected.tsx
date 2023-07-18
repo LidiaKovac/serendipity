@@ -8,10 +8,10 @@ import { getUserId } from "../../utils"
 import { useEffect, useState } from "react"
 
 interface Props {
-    selected: Course, 
-    updateFavs: ()=> void 
-    isModalOpen: boolean 
-    setOpenModal: (status:boolean)=> void
+    selected: Course,
+    updateFavs: () => void
+    isModalOpen: boolean
+    setOpenModal: (status: boolean) => void
 }
 export const Selected = ({ selected, updateFavs, isModalOpen, setOpenModal }: Props) => {
     const [rawFavs, setRawFavs] = useState<Fav[]>([])
@@ -96,9 +96,12 @@ export const Selected = ({ selected, updateFavs, isModalOpen, setOpenModal }: Pr
 
         {selected && (
             <Modal
-                course={selected}
+                isFav={isFav(selected.id)}
+                selected={selected}
                 isOpen={isModalOpen}
                 close={() => setOpenModal(false)}
+                removeFav={()=> {removeFav()}}
+                addToFav={()=> {addToFav()}}
             />
         )
         }

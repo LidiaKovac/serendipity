@@ -1,6 +1,6 @@
 @import "../../style/color";
 .modal__backdrop {
-    display: none;
+  display: none;
   background-color: rgb(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -95,7 +95,13 @@
     text-align: center;
   }
 }
+@media screen and (max-width: 1100px) {
 
+  .modal__backdrop,
+  .modal {
+    display: flex !important;
+  }
+}
 @media screen and (max-width: 1000px) {
   .modal {
     width: 400px;
@@ -120,9 +126,3 @@
     padding: 10px !important;
   }
 }
-@media screen and (max-width: 1100px) {
-
-    .modal__backdrop, .modal {
-      display: flex!important;
-    }
-  }

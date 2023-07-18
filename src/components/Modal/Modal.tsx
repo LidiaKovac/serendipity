@@ -2,20 +2,26 @@ import style from "./Modal.module.scss"
 import { FaPlay } from "react-icons/fa"
 import { IoIosSpeedometer } from "react-icons/io"
 import { HiOutlineClock } from "react-icons/hi"
-import {MdOutlineClose} from "react-icons/md"
-import { BsFillCalendarWeekFill, BsFillBookmarkFill } from "react-icons/bs"
+import { MdOutlineClose } from "react-icons/md"
+import { BsFillCalendarWeekFill, BsFillBookmarkFill, BsBookmarkXFill } from "react-icons/bs"
+interface Props {
+    isOpen: boolean
+    close: () => void
+    selected: Course
+    isFav: boolean
+    removeFav: () => void
+    addToFav: () => void
+}
+export const Modal = ({ isOpen, close, selected, isFav, removeFav, addToFav }: Props) => {
 
-export const Modal = ({ isOpen, close, course }: { isOpen: boolean, close: () => void, course: Course }) => {
-    return isOpen && <> <div onClick={() => close()} className={style["modal__backdrop"]}>
-
-    </div>
+    return isOpen && <>
+        <div onClick={() => close()} className={style["modal__backdrop"]}></div>
         <div className={style["modal"]}>
-            <div className={style["close__button"]} onClick={()=> close()}>
-                <MdOutlineClose/>
+            <div className={style["close__button"]} onClick={() => close()}>
+                <MdOutlineClose />
             </div>
             <div className={style["modal__header"]}>
-
-                <img src={course.img} alt="" />
+                <img src={selected.img} alt="thumbnail" />
                 <div className={style["modal__commands"]}>
 
                     <button>
@@ -24,24 +30,31 @@ export const Modal = ({ isOpen, close, course }: { isOpen: boolean, close: () =>
                     <button>
                         <BsFillCalendarWeekFill />
                     </button>
-                    <button>
-                        <BsFillBookmarkFill />
+                    <button onClick={() => {
+                        if (isFav) {
+                            removeFav()
+                        } else addToFav()
+                    }}>
+                        {
+                            isFav ? <BsBookmarkXFill /> : <BsFillBookmarkFill />
+                        }
+
                     </button>
                 </div>
 
             </div>
             <div className={style["modal__details"]}>
-                <h2>{course.title}</h2>
+                <h2>{selected.title}</h2>
                 <div className={style["card__duration"]}>
-                    <HiOutlineClock /> {course.duration} min
+                    <HiOutlineClock /> {selected.duration} min
                 </div>
                 <div className={style["card__level"]}>
-                    <IoIosSpeedometer color="lightblue" /> Livello {course.level}
+                    <IoIosSpeedometer color="lightblue" /> Livello {selected.level}
                 </div>
 
             </div>
             <div className={style["modal__description"]}>
-                {course.description}
+                {selected.description}
             </div>
         </div></>
 

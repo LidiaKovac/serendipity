@@ -1,5 +1,4 @@
 import style from "./Card.module.scss"
-import pic from "../../assets/courses/img1.png"
 import { IoIosSpeedometer } from "react-icons/io"
 import { HiOutlineClock } from "react-icons/hi"
 interface Props {
