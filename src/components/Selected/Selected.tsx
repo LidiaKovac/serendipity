@@ -34,7 +34,7 @@ export const Selected = ({ selected, updateFavs, isModalOpen, setOpenModal }: Pr
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then(res => res.json()).then(r => {
+        }).then(res => res.json()).then(() => {
             fetchFavs().finally(() => console.log("done"))
         }).catch(err => console.error(err))
     }

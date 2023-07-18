@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend": "json-server-auth --watch db.json --port 3000",
+    "fullstack": "concurrently \"npm run backend\" \"npm run build\""
+
   },
   "dependencies": {
     "json-server": "^0.17.3",
