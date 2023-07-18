@@ -61,8 +61,8 @@ export const Favourites = () => {
             />
           ))}
         </div>
-            {selected&&  <Selected selected={selected}/>}
-    </div>
+        {selected && <Selected updateFavs={() => { setSelected(null); fetchFavs().finally(() => console.log("done")) }} selected={selected} />}
+      </div>
     </div>
   )
 }

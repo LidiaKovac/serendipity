@@ -8,7 +8,7 @@ import { getUserId } from "../../utils"
 import { useEffect, useState } from "react"
 
 
-export const Selected = ({ selected }: { selected: Course }) => {
+export const Selected = ({ selected, updateFavs }: { selected: Course, updateFavs: () => void }) => {
     const [rawFavs, setRawFavs] = useState<Fav[]>([])
     const fetchFavs = async () => {
         const userId = getUserId()
@@ -30,7 +30,7 @@ export const Selected = ({ selected }: { selected: Course }) => {
                 "Content-Type": "application/json"
             }
         }).then(res => res.json()).then(r => {
-            fetchFavs().finally(()=> console.log("done"))
+            fetchFavs().finally(() => console.log("done"))
         }).catch(err => console.error(err))
     }
     const isFav = (id: number) => {
@@ -45,7 +45,7 @@ export const Selected = ({ selected }: { selected: Course }) => {
                 fetch(`http://localhost:3000/favourites/${fav[0].id}`, {
                     method: "DELETE"
                 }).then(() => {
-                    // setSelected(null)
+                    updateFavs()
                     fetchFavs().finally(() => console.log("done"))
                 }).catch(err => console.error(err))
             }).catch(err => console.error(err))
