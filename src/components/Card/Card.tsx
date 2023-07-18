@@ -11,7 +11,7 @@ export const Card = ({ course, setSelected, isSel }: Props) => {
         setSelected(crs)
     }
     return (
-        <div  className={`${style["card"]} ${isSel? style['selected'] : ""}`} onClick={() => select(course)}>
+        <div className={`${style["card"]} ${isSel ? style['selected'] : ""}`} onClick={() => select(course)}>
             <img src={course.img} alt="" />
             <div className={style["card__body"]}>
 
