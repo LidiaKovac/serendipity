@@ -9,9 +9,10 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "backend": "json-server-auth --watch db.json --port 3000",
-    "fullstack": "concurrently \"npm run backend\" \"npm run build --exec \" npm run preview \" \""
+    "fullstack": "concurrently \"npm run build --exec \" npm run preview \" \" \"npm run backend\" "
   },
   "dependencies": {
+    "concurrently": "^8.2.0",
     "json-server": "^0.17.3",
     "json-server-auth": "^2.1.0",
     "react": "^18.2.0",
