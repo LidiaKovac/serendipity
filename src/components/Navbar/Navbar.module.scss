@@ -1,0 +1,19 @@
+@import "../../style/color";
+nav.navbar {
+    position: fixed;
+    top: 0;
+    right: 40px;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+    font-family: raleway;
+    font-weight: bold;
+    a,div {
+        color: $text!important;
+        text-decoration: underline;
+    }
+    height: 90px;
+    
+}
