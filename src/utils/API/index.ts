@@ -1,6 +1,6 @@
 export const fetchMe = async () => {
     try {
-        const res: Response = await fetch(`process.env.API_URLuser/me`, {
+        const res: Response = await fetch(`${import.meta.env.VITE_API_URL as string}user/me`, {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
             }
@@ -18,7 +18,7 @@ export const fetchMe = async () => {
 export const fetchCourses = async () => {
     try {
 
-        const res = await fetch("process.env.API_URLcourses", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL as string}courses`, {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
             }
@@ -42,7 +42,7 @@ export const fetchFavs = async () => {
     try {
 
         // const userId = getUserId()
-        const res = await fetch(`process.env.API_URLuser/favs`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL as string}user/favs`, {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
             }

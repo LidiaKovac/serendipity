@@ -20,7 +20,7 @@ export const Signup = () => {
       return
     }
     // fd.delete("passwordConfirm")
-    fetch("process.env.API_URLuser", {
+    fetch(`${import.meta.env.VITE_API_URL as string}user`, {
       method: "POST",
       body: fd,
     })

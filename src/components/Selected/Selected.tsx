@@ -18,7 +18,7 @@ export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFav
     // const [rawFavs, setRawFavs] = useState<Fav[]>([])
     const toggleFav = async (): Promise<void> => {
         try {
-            const res = await fetch(`process.env.API_URLuser/favs/${selected._id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL as string}user/favs/${selected._id}`, {
                 method: "PATCH",
                 headers: {
                     "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`

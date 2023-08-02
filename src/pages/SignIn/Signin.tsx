@@ -10,7 +10,7 @@ export const Signin = () => {
     ev.preventDefault()
 
     const fd = new FormData(ev.target as HTMLFormElement)
-    fetch("process.env.API_URLuser/login", {
+    fetch(`${import.meta.env.VITE_API_URL as string}user/login`, {
       method: "POST",
       body: fd,
     })
