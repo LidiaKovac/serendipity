@@ -1,6 +1,6 @@
 export const fetchMe = async () => {
     try {
-        const res: Response = await fetch(`https://serendipity.cyclic.cloud/user/me`, {
+        const res: Response = await fetch(`process.env.API_URLuser/me`, {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
             }
@@ -18,7 +18,7 @@ export const fetchMe = async () => {
 export const fetchCourses = async () => {
     try {
 
-        const res = await fetch("https://serendipity.cyclic.cloud/courses", {
+        const res = await fetch("process.env.API_URLcourses", {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
             }
@@ -42,7 +42,7 @@ export const fetchFavs = async () => {
     try {
 
         // const userId = getUserId()
-        const res = await fetch(`https://serendipity.cyclic.cloud/user/favs`, {
+        const res = await fetch(`process.env.API_URLuser/favs`, {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
             }

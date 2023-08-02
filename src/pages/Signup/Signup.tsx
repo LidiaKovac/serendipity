@@ -20,7 +20,7 @@ export const Signup = () => {
       return
     }
     // fd.delete("passwordConfirm")
-    fetch("https://serendipity.cyclic.cloud/user", {
+    fetch("process.env.API_URLuser", {
       method: "POST",
       body: fd,
     })

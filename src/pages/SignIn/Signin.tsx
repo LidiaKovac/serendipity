@@ -10,7 +10,7 @@ export const Signin = () => {
     ev.preventDefault()
 
     const fd = new FormData(ev.target as HTMLFormElement)
-    fetch("https://serendipity.cyclic.cloud/user/login", {
+    fetch("process.env.API_URLuser/login", {
       method: "POST",
       body: fd,
     })
