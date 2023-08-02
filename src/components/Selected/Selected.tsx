@@ -5,7 +5,6 @@ import { FaPlay } from "react-icons/fa"
 import { BsFillCalendarWeekFill, BsFillBookmarkFill, BsBookmarkXFill } from "react-icons/bs"
 import { Modal } from "../../components/Modal/Modal"
 import { fetchFavs } from "../../utils/API"
-import { useState, useCallback, useEffect } from "react"
 
 
 interface Props {
@@ -17,10 +16,7 @@ interface Props {
 }
 export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFavs }: Props) => {
     // const [rawFavs, setRawFavs] = useState<Fav[]>([])
-    const [isFavIn, setIsFav] = useState(isFav)
     const toggleFav = async (): Promise<void> => {
-        console.log("ou");
-
         try {
             const res = await fetch(`https://serendipity.cyclic.cloud/user/favs/${selected._id}`, {
                 method: "PATCH",

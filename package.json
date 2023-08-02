@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "backend": "json-server-auth --watch db.json --port 3000",
-    "start": "concurrently \"npm run preview\" \"npm run backend\" "
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "concurrently": "^8.2.0",

@@ -1,8 +1,8 @@
-import { FormEvent, useContext, useReducer } from "react"
+import { FormEvent, useContext } from "react"
 import { Button } from "../../components/Button/Button"
 import style from "./Signup.module.scss"
 import { useNavigate } from "react-router-dom"
-import { ErrorsDispatchContext, errorsReducer } from "../../context"
+import { ErrorsDispatchContext } from "../../context"
 export const Signup = () => {
   const dispatch = useContext(ErrorsDispatchContext)
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ export const Signup = () => {
       body: fd,
     })
       .then((res) => res.text())
-      .then((_) => {
+      .then(() => {
         // localStorage.setItem("serendipity-user", JSON.stringify(user))
         navigate("/login")
       })

@@ -2,7 +2,7 @@ import { createContext } from "react";
 import uniqid from "uniqid"
 
 export const ErrorsContext = createContext<IError[]>([])
-export const ErrorsDispatchContext = createContext<React.Dispatch<any>>(()=>null);
+export const ErrorsDispatchContext = createContext<React.Dispatch<ErrorAction>>(()=>null);
 export function errorsReducer(errors: IError[], action: ErrorAction) {
     switch (action.type) {
         case 'add': {

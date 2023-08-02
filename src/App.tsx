@@ -1,5 +1,5 @@
 import { useReducer, Suspense } from 'react'
-import { createBrowserRouter, redirect, RouterProvider, useNavigate } from "react-router-dom"
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom"
 import { ErrorsContext, ErrorsDispatchContext, errorsReducer } from './context'
 import { Loader } from './pages/Loader/Loader'
 import { Layout } from './pages/RouterLayout/RouterLayout'

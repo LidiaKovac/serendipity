@@ -1,7 +1,7 @@
 import { Alert } from "../Alert"
 import styles from "../Alert.module.scss"
-import { ErrorsContext, errorsReducer } from "../../../context"
-import { useContext, useReducer } from "react"
+import { ErrorsContext } from "../../../context"
+import { useContext } from "react"
 
 export const AlertList = () => {
     const errors = useContext(ErrorsContext)
