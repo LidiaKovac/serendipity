@@ -17,7 +17,7 @@ export const Courses = () => {
     if (!ls) {
       navigate("/signin")
     }
-    fetch("http://localhost:3000/courses")
+    fetch("serendipity.cyclic.cloud/courses")
       .then((res) => res.json())
       .then((crs) => setCourses(crs as Course[]))
       .catch((err) => console.error(err))
@@ -38,7 +38,7 @@ export const Courses = () => {
             />
           ))}
         </div>
-        {selected && <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal}  updateFavs={() => { return }} selected={selected} />}
+        {selected && <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal} updateFavs={() => { return }} selected={selected} />}
       </div>
     </div>
   )

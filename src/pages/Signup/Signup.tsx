@@ -15,12 +15,9 @@ export const Signup = () => {
       return
     }
     fd.delete("passwordConf")
-    fetch("http://localhost:3000/signup", {
+    fetch("https://serendipity.cyclic.cloud/user", {
       method: "POST",
-      body: JSON.stringify(formDataToJson(fd)),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: fd,
     })
       .then((res) => res.json())
       .then((user: { user: User; accessToken: string }) => {

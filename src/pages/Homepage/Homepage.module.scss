@@ -114,6 +114,7 @@
   // .hide {
   //    display: none
   // }
+.homepage__wrap {
 
   h1 {
     font-size: 70px !important;
@@ -126,34 +127,29 @@
     font-size: 30px !important;
   }
 }
+}
 
 @media screen and (max-width: 550px) {
-  .hide {
-    //    display: none
-  }
-  #rotating {
-    //    margin-left: 20px!important;
-  }
-  h1 {
-    font-size: 50px !important;
-  }
-  p {
-    margin-top: 50px;
-    font-size: 20px !important;
-  }
-  button {
-    font-size: 20px !important;
+
+  .homepage__wrap {
+
+    h1 {
+      font-size: 50px !important;
+    }
+    p {
+      margin-top: 50px;
+      font-size: 20px !important;
+    }
+    button {
+      font-size: 20px !important;
+    }
   }
 }
 
 
 @media screen and (max-width: 400px) {
-    .hide {
-      //    display: none
-    }
-    #rotating {
-      //    margin-left: 20px!important;
-    }
+
+  .homepage__wrap {
     h1 {
       font-size: 35px !important;
     }
@@ -165,4 +161,5 @@
       font-size: 15px !important;
     }
   }
+}
   

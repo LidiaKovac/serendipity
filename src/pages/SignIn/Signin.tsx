@@ -10,12 +10,10 @@ export const Signin = () => {
     ev.preventDefault()
     setErr(null)
     const fd = new FormData(ev.target as HTMLFormElement)
-    fetch("http://localhost:3000/login", {
+    fetch("https://serendipity.cyclic.cloud/user/login", {
       method: "POST",
-      body: JSON.stringify(formDataToJson(fd)),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: fd,
+      
     })
       .then((res) => {
         return res.json()
