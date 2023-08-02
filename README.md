@@ -1,7 +1,6 @@
 # serendipity
-Warning! This project was developed with json-server, so it cannot be deployed to production. 
 
-To see the project, use `npm i` and `npm run dev`. 
+[BACKEND REPO](https://github.com/LidiaKovac/serendipity-be)
 
 
 ![img](https://imgur.com/eV2G1LC.png)
