@@ -4,7 +4,7 @@ interface Course {
     level:       number;
     description: string;
     img:         string;
-    id:          number;
+    _id:          number;
 }
 
 interface User {
@@ -12,7 +12,7 @@ interface User {
     lastName:   string;
     email:      string;
     password:   string;
-    id:         number
+    _id:         number
 }
 
 interface Auth {
@@ -24,4 +24,11 @@ interface Fav {
     courseId:   number 
     id:         number 
     userId:     number
+}
+
+
+interface IError {
+    status: "success" | "danger" | "warning" | "info",
+    text: string
+    id: string
 }

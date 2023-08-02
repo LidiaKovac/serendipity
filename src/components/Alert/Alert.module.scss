@@ -1,0 +1,56 @@
+@import "../../style/color";
+// @import "../../styles/layout";
+// @import "../../styles/mixins";
+// @import "../../styles/animations";
+.alert__list {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+.alert {
+  position: relative;
+  padding: 20px;
+  padding-right: 50px;
+  width: fit-content;
+  margin: 20px;
+  font-family: "raleway", sans-serif;
+
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  svg:not(.alert__close) {
+    width: 20px;
+    height: 20px;
+  }
+  span {
+    padding: 3px;
+    background-color: white;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    line-height: 12px;
+    border-radius: 20px;
+
+    svg.alert__close {
+      width: 16px;
+    }
+  }
+}
+
+@each $state, $col in $colors {
+  .alert--#{$state} {
+    @extend .alert;
+    background-color: lighten($col, 10%);
+    transition: 0.5s;
+    &:hover {
+      transform: rotate(-5deg);
+    }
+    span:hover {
+      background-color: $col;
+      color: white;
+    }
+    color: darken($col, 40%);
+  }
+}

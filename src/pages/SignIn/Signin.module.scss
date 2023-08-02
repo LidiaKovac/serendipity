@@ -1,17 +1,17 @@
 @import "../../style/color";
 
 .signin__wrap {
-    width: 100vw;
-    height: 100vh;
-  
-    background-color: $bg;
-    color: $blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: raleway;
-    font-weight: bold;
-  
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $bg;
+  color: $blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: raleway;
+  font-weight: bold;
+
   form {
     min-width: 350px;
     background-color: white;
@@ -25,35 +25,35 @@
     justify-content: center;
     gap: 20px;
     input {
-        background-color: $bg;
-        border: 2px solid transparentize($orange_light, 0.5);
-        width: 100%;
-        height: 40px;
-        border-radius: 40px;
-        padding-left: 20px;
-        font-size: 15px;
-        &:focus {
-          outline-color: $text !important;
-        }
-        &::placeholder {
-          font-weight: bold;
-          color: transparentize($blue, 0.5);
-        }
+      background-color: $bg;
+      border: 2px solid transparentize($orange_light, 0.5);
+      width: 100%;
+      height: 40px;
+      border-radius: 40px;
+      padding-left: 20px;
+      font-size: 15px;
+      &:focus {
+        outline-color: $text !important;
       }
-      button {
-        background-color: #ffe3c4;
-  border: #fcbc74 3px solid;
-  border-radius: 50px;
-  padding: 10px 20px;
-  font-weight: bold;
-  color: $text;
-  width: 50%;
-  transition: .1s;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.1);
-  }
+      &::placeholder {
+        font-weight: bold;
+        color: transparentize($blue, 0.5);
       }
+    }
+    button {
+      background-color: #ffe3c4;
+      border: #fcbc74 3px solid;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-weight: bold;
+      color: $text;
+      width: 50%;
+      transition: 0.1s;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
   }
 }
 
