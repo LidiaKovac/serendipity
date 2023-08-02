@@ -4,57 +4,39 @@ import { HiOutlineClock } from "react-icons/hi"
 import { FaPlay } from "react-icons/fa"
 import { BsFillCalendarWeekFill, BsFillBookmarkFill, BsBookmarkXFill } from "react-icons/bs"
 import { Modal } from "../../components/Modal/Modal"
-import { getUserId } from "../../utils"
-import { useEffect, useState } from "react"
+import { fetchFavs } from "../../utils/API"
+import { useState, useCallback, useEffect } from "react"
+
 
 interface Props {
     selected: Course,
-    updateFavs: () => void
+    isFav: boolean
     isModalOpen: boolean
+    updateFavs: (favs: Course[]) => void
     setOpenModal: (status: boolean) => void
 }
-export const Selected = ({ selected, updateFavs, isModalOpen, setOpenModal }: Props) => {
-    const [rawFavs, setRawFavs] = useState<Fav[]>([])
-    const fetchFavs = async () => {
-        const userId = getUserId()
-        const res = await fetch(`http://localhost:3000/favourites?userId=${userId}`)
-        const rawFavList = await res.json() as Fav[]
-        setRawFavs(rawFavList)
-    }
-    useEffect(() => {
-        fetchFavs().finally(() => console.log("done"))
-    }, [])
-    const addToFav = () => {
-        fetch("http://localhost:3000/favourites", {
-            method: "POST",
-            body: JSON.stringify({
-                courseId: selected?.id,
-                userId: getUserId()
-            }),
-            headers: {
-                "Content-Type": "application/json"
+export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFavs }: Props) => {
+    // const [rawFavs, setRawFavs] = useState<Fav[]>([])
+    const [isFavIn, setIsFav] = useState(isFav)
+    const toggleFav = async (): Promise<void> => {
+        console.log("ou");
+
+        try {
+            const res = await fetch(`https://serendipity.cyclic.cloud/user/favs/${selected._id}`, {
+                method: "PATCH",
+                headers: {
+                    "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
+                }
+            })
+            if (res.ok) {
+                const resFavs = await fetchFavs()
+                updateFavs(resFavs as Course[])
             }
-        }).then(res => res.json()).then(() => {
-            fetchFavs().finally(() => console.log("done"))
-        }).catch(err => console.error(err))
+        } catch (error) {
+            // return error as IError
+        }
     }
-    const isFav = (id: number) => {
-        console.log(id, rawFavs)
-        return rawFavs.some(crs => crs.courseId === id)
-    }
-    const removeFav = () => {
-        fetch(`http://localhost:3000/favourites?userId=${getUserId()}&courseId=${selected.id}`)
-            .then(res => res.json())
-            .then((fav: Fav[]) => {
-                console.log(fav)
-                fetch(`http://localhost:3000/favourites/${fav[0].id}`, {
-                    method: "DELETE"
-                }).then(() => {
-                    updateFavs()
-                    fetchFavs().finally(() => console.log("done"))
-                }).catch(err => console.error(err))
-            }).catch(err => console.error(err))
-    }
+
 
 
     return (<>
@@ -68,13 +50,9 @@ export const Selected = ({ selected, updateFavs, isModalOpen, setOpenModal }: Pr
                     <button>
                         <BsFillCalendarWeekFill />
                     </button>
-                    <button onClick={() => {
-                        if (isFav(selected.id)) {
-                            removeFav()
-                        } else addToFav()
-                    }}>
+                    <button onClick={() => { void toggleFav() }}>
                         {
-                            isFav(selected.id) ? <BsBookmarkXFill /> : <BsFillBookmarkFill />
+                            isFav ? <BsBookmarkXFill /> : <BsFillBookmarkFill />
                         }
 
                     </button>
@@ -96,12 +74,12 @@ export const Selected = ({ selected, updateFavs, isModalOpen, setOpenModal }: Pr
 
         {selected && (
             <Modal
-                isFav={isFav(selected.id)}
+                isFav={isFav}
                 selected={selected}
                 isOpen={isModalOpen}
                 close={() => setOpenModal(false)}
-                removeFav={()=> {removeFav()}}
-                addToFav={()=> {addToFav()}}
+                removeFav={() => { void toggleFav() }}
+                addToFav={() => { void toggleFav() }}
             />
         )
         }

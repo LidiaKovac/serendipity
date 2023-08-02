@@ -3,14 +3,14 @@ import style from "./Navbar.module.scss"
 export const Navbar = () => {
     const navigate = useNavigate()
     const isLogged = () => {
-        const ls = JSON.parse(localStorage.getItem("serendipity-user")!) as User | null
+        const ls = localStorage.getItem("serendipity-token")! as string | null
         if (ls) {
             return true
         } else return false
     }
     const logout = () => {
-        localStorage.removeItem("serendipity-user")
-        navigate("/signin")
+        localStorage.removeItem("serendipity-token")
+        navigate("/login")
     }
     return (
         <nav className={style["navbar"]}>
@@ -23,7 +23,7 @@ export const Navbar = () => {
             {
                 !isLogged() && <>
                     <Link to="/signup">Register</Link>
-                    <Link to="/signin">Login</Link>
+                    <Link to="/login">Login</Link>
 
                 </>
             }

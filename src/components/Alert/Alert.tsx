@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { VscChromeClose } from "react-icons/vsc"
 import { BsEmojiNeutral, BsEmojiSmile, BsEmojiFrown, BsFillLightningChargeFill } from "react-icons/bs"
+import { ErrorsDispatchContext } from "../../context"
 import styles from "./Alert.module.scss"
-export const Alert = ({err, filterError}:{err: IError, filterError: (id:string)=>void}) => {
+export const Alert = ({ err }: { err: IError }) => {
+    const dispatch = useContext(ErrorsDispatchContext)
     const [icon, setIcon] = useState(<BsEmojiSmile />)
     useEffect(() => {
         switch (err.status) {
@@ -28,7 +30,10 @@ export const Alert = ({err, filterError}:{err: IError, filterError: (id:string)=
             {icon} {err.text}
             <span
                 onClick={() => {
-                    filterError(err.id)
+                    dispatch({
+                        type: "remove",
+                        ...err
+                    })
                 }}
             >
                 <VscChromeClose className={styles['alert__close']} />

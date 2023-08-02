@@ -1,17 +1,21 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useContext, useReducer } from "react"
 import { Button } from "../../components/Button/Button"
 import style from "./Signup.module.scss"
 import { useNavigate } from "react-router-dom"
-import { AlertList } from "../../components/Alert/AlertList/AlertList"
+import { ErrorsDispatchContext, errorsReducer } from "../../context"
 export const Signup = () => {
-  const [err, setErr] = useState<IError[]>([])
+  const dispatch = useContext(ErrorsDispatchContext)
   const navigate = useNavigate()
   const submitForm = (ev: FormEvent) => {
     ev.preventDefault()
-    setErr([])
+
     const fd = new FormData(ev.target as HTMLFormElement)
     if (fd.get("password") !== fd.get("passwordConfirm")) {
-      setErr((prev) => ([...prev, { status: "danger", text: "Le password sono diverse!", id: `danger_${prev.length}` }]))
+      dispatch({
+        type: "add",
+        status: "danger",
+        text: "Le password sono diverse!",
+      })
 
       return
     }
@@ -25,21 +29,17 @@ export const Signup = () => {
         // localStorage.setItem("serendipity-user", JSON.stringify(user))
         navigate("/login")
       })
-      .catch((err) => {
+      .catch((err: IError) => {
         console.log(err)
-        setErr(prev => ([...prev, {
-          status: "danger",
-          text: "C'e' stato un errore.",
-          id: `danger_${prev.length}`
-        }]))
+        dispatch({
+          type: "add",
+          ...err,
+        })
       })
   }
-  const filterError = (id: string) => {
-    setErr(prev => prev.filter(el => el.id !== id))
-  }
+
   return (
     <>
-      <AlertList errors={err} filterError={filterError} />
       <div className={style["signup__wrap"]}>
         <form onSubmit={submitForm}>
           <h1>Ciao! 👋</h1>

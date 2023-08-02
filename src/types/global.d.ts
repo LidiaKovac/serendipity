@@ -4,7 +4,7 @@ interface Course {
     level:       number;
     description: string;
     img:         string;
-    _id:          number;
+    _id:         string;
 }
 
 interface User {
@@ -12,7 +12,7 @@ interface User {
     lastName:   string;
     email:      string;
     password:   string;
-    _id:         number
+    _id:        string
 }
 
 interface Auth {
@@ -20,15 +20,15 @@ interface Auth {
     accessToken:string 
 }
 
-interface Fav {
-    courseId:   number 
-    id:         number 
-    userId:     number
-}
 
 
 interface IError {
     status: "success" | "danger" | "warning" | "info",
     text: string
-    id: string
+    id?: string
+}
+
+type ErrorActionTypes = 'add' | 'remove'
+interface ErrorAction extends IError {
+    type: ErrorActionTypes
 }

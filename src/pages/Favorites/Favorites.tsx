@@ -1,40 +1,18 @@
 import { Card } from "../../components/Card/Card"
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 
 import style from "./Favorites.module.scss"
-import { useNavigate } from "react-router-dom"
-import { getUserId } from "../../utils"
+
 import { Selected } from "../../components/Selected/Selected"
+import { useLoaderData } from "react-router-dom"
+
 export const Favourites = () => {
-  const navigate = useNavigate()
-  const [favs, setFavs] = useState<Course[]>([])
+  const preloadedFavs = useLoaderData() as Course[]
+  const [favs, setFavs] = useState<Course[]>(preloadedFavs)
   const [selected, setSelected] = useState<Course | null>(null)
   const [isModalOpen, setOpenModal] = useState<boolean>(false)
-  const fetchFavs = async () => {
-    const userId = getUserId()
-    const res = await fetch(`http://localhost:3000/favourites?userId=${userId}`)
-    const rawFavList = await res.json() as Fav[]
-    const populated: Course[] = []
-    for (let i = 0; i < rawFavList.length; i++) {
-      const { courseId } = rawFavList[i];
-      const raw = await fetch(`http://localhost:3000/courses/${courseId}`)
-      const crs = await raw.json() as Course
-      populated.push(crs)
-    }
-    setFavs(populated)
-  }
 
-  useEffect(() => {
-    const ls = JSON.parse(
-      localStorage.getItem("serendipity-user")!
-    ) as Auth | null
-    console.log(ls)
-    if (!ls) {
-      navigate("/signin")
-    } else {
-      fetchFavs().finally(() => console.log("done"))
-    }
-  }, [])
+
   return (
     <div className={style["courses__wrap"]}>
       <h1>Preferiti</h1>
@@ -43,8 +21,8 @@ export const Favourites = () => {
           {favs.length === 0 && <h2>Non hai ancora aggiunto nulla ai preferiti</h2>}
           {favs?.map((crs) => (
             <Card
-              key={crs.id}
-              isSel={crs.id === selected?.id}
+              key={crs._id}
+              isSel={crs._id === selected?._id}
               setSelected={(data: Course) => {
                 setSelected(data)
                 setOpenModal(true)
@@ -53,7 +31,7 @@ export const Favourites = () => {
             />
           ))}
         </div>
-        {selected && <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal} updateFavs={() => { setSelected(null); fetchFavs().finally(() => console.log("done")) }} selected={selected} />}
+        {selected && <Selected updateFavs={(fvs) => { setSelected(null); setFavs(fvs) }} isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} selected={selected} />}
       </div>
     </div>
   )

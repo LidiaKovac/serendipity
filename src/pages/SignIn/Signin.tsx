@@ -1,6 +1,5 @@
 import { FormEvent, useState } from "react"
 import style from "./Signin.module.scss"
-import { formDataToJson } from "../../utils"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../../components/Button/Button"
 import { AlertList } from "../../components/Alert/AlertList/AlertList"
@@ -11,7 +10,7 @@ export const Signin = () => {
     ev.preventDefault()
     setErr([])
     const fd = new FormData(ev.target as HTMLFormElement)
-    fetch("http://localhost:3000/user/login", {
+    fetch("https://serendipity.cyclic.cloud/user/login", {
       method: "POST",
       body: fd,
 
@@ -37,7 +36,6 @@ export const Signin = () => {
   }
   return (
     <>
-      <AlertList errors={err} filterError={filterError} />
       <div className={style["signin__wrap"]}>
         <form onSubmit={login}>
           <h1>Bentornat*! 👋</h1>
