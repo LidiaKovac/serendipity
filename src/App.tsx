@@ -1,10 +1,9 @@
-import { useReducer, Suspense } from 'react'
-import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom"
+import {   Suspense } from 'react'
+import { createBrowserRouter,   RouterProvider } from "react-router-dom"
 import { Loader } from './pages/Loader/Loader'
 import { Layout } from './pages/RouterLayout/RouterLayout'
-import { fetchCourses, fetchFavs, fetchMe } from './utils/API/index.ts'
 import { Provider } from 'react-redux'
-import { store, useAppDispatch } from './redux/index.ts'
+import { store } from './redux/index.ts'
 
 
 function App() {

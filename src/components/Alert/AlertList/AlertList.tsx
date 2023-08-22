@@ -1,7 +1,6 @@
 import { RootState, useAppSelector } from "../../../redux"
 import { Alert } from "../Alert"
 import styles from "../Alert.module.scss"
-import { useContext } from "react"
 
 export const AlertList = () => {
     const errors:IError[] = useAppSelector((state:RootState) => state.alerts.alerts)

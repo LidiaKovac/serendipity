@@ -1,5 +1,5 @@
 import { Card } from "../../components/Card/Card"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 
 import style from "./Favorites.module.scss"
 
@@ -16,6 +16,7 @@ export const Favourites = () => {
 
   useEffect(() => {
     void dispatch(getFavs(null))
+    // eslint-disable-next-line
   }, [])
   return (
     <div className={style["courses__wrap"]}>

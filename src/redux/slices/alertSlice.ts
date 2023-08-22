@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RootState } from ".."
+import {   createSlice, PayloadAction } from "@reduxjs/toolkit"
 import uniqid from "uniqid"
 const initialState: { alerts: IError[] } = {
     alerts: [] as IError[]

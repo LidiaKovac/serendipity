@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { VscChromeClose } from "react-icons/vsc"
 import { BsEmojiNeutral, BsEmojiSmile, BsEmojiFrown, BsFillLightningChargeFill } from "react-icons/bs"
 import styles from "./Alert.module.scss"
@@ -29,6 +29,7 @@ export const Alert = ({ err }: { err: IError }) => {
         setTimeout(()=> {
             dispatch(removeAlert(err.id!))
         }, 5000)
+       // eslint-disable-next-line
     }, [])
     return (
         <div className={styles[`alert--${err.status}`]}>

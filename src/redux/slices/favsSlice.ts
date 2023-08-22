@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addAlert } from "./alertSlice"
 const initialState: { favs: Course[] } = {
   favs: [] as Course[]
@@ -27,7 +27,7 @@ export const getFavs = createAsyncThunk("favs/getFavs", (_: null, { rejectWithVa
 
 
 export const toggleFavs = createAsyncThunk("favs/toggleFavs", (courseId: string, { rejectWithValue, dispatch }): Promise<Course[]> => {
-  return new Promise((res, rej) => {
+  return new Promise((_, rej) => {
     fetch(`${import.meta.env.VITE_API_URL as string}user/favs/${courseId}`, {
       method: "PATCH",
       headers: {
@@ -46,7 +46,7 @@ export const toggleFavs = createAsyncThunk("favs/toggleFavs", (courseId: string,
       status: "success", 
       text: "Favourites sucessfully modified."
     })))
-      .then(_ => {
+      .then(() => {
         return dispatch(getFavs(null))
       })
       .catch(err => {

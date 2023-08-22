@@ -17,6 +17,7 @@ export const Courses = () => {
   useEffect(() => {
     void dispatch(getCourses(null))
     void dispatch(getFavs(null))
+    // eslint-disable-next-line
   }, [])
 
   return (
