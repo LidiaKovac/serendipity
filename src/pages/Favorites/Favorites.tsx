@@ -6,11 +6,12 @@ import style from "./Favorites.module.scss"
 import { Selected } from "../../components/Selected/Selected"
 import { RootState, useAppDispatch, useAppSelector } from "../../redux"
 import { getFavs } from "../../redux/slices/favsSlice"
+import { setSelected } from "../../redux/slices/courseSlice"
 
 export const Favourites = () => {
   const favs: Course[] = useAppSelector((state: RootState) => state.favs.favs)
+  const selected: Course | null = useAppSelector((state: RootState) => state.courses.selected)
   const dispatch = useAppDispatch()
-  const [selected, setSelected] = useState<Course | null>(null)
   const [isModalOpen, setOpenModal] = useState<boolean>(false)
 
   useEffect(() => {
@@ -27,14 +28,14 @@ export const Favourites = () => {
               key={crs._id}
               isSel={crs._id === selected?._id}
               setSelected={(data: Course) => {
-                setSelected(data)
+                dispatch(setSelected(data))
                 setOpenModal(true)
               }}
               course={crs}
             />
           ))}
         </div>
-        {selected && <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} selected={selected} />}
+        <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected?._id)}  />
       </div>
     </div>
   )

@@ -4,13 +4,14 @@ import { useState, useEffect } from "react"
 import style from "./Courses.module.scss"
 import { Selected } from "../../components/Selected/Selected"
 import { RootState, useAppDispatch, useAppSelector } from "../../redux"
-import { getCourses } from "../../redux/slices/courseSlice"
+import { getCourses, setSelected } from "../../redux/slices/courseSlice"
 import { getFavs } from "../../redux/slices/favsSlice"
 
 export const Courses = () => {
-  const { favs: { favs }, courses: { courses } } = useAppSelector((state: RootState) => state)
+  const favs = useAppSelector((state:RootState)=> state.favs.favs)
+
+  const {courses, selected} = useAppSelector((state:RootState)=> state.courses)
   const dispatch = useAppDispatch()
-  const [selected, setSelected] = useState<Course | null>(null)
   const [isModalOpen, setOpenModal] = useState<boolean>(true)
 
   useEffect(() => {
@@ -27,16 +28,17 @@ export const Courses = () => {
         <div className={style["courses__list"]}>
           {courses.map((crs) => (
             <Card
+            key={crs._id}
               isSel={crs._id === selected?._id}
               setSelected={(data: Course) => {
-                setSelected(data)
+                dispatch(setSelected(data))
                 setOpenModal(true)
               }}
               course={crs}
             />
           ))}
         </div>
-        {selected && <Selected  isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} selected={selected} />}
+        {selected && <Selected  isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} />}
       </div>
     </div>
   )

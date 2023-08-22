@@ -4,25 +4,24 @@ import { HiOutlineClock } from "react-icons/hi"
 import { FaPlay } from "react-icons/fa"
 import { BsFillCalendarWeekFill, BsFillBookmarkFill, BsBookmarkXFill } from "react-icons/bs"
 import { Modal } from "../../components/Modal/Modal"
-import { addAlert } from "../../redux/slices/alertSlice"
-import { useAppDispatch } from "../../redux"
+import { RootState, useAppDispatch, useAppSelector } from "../../redux"
 import { toggleFavs } from "../../redux/slices/favsSlice"
 
 
 interface Props {
-    selected: Course,
     isFav: boolean
     isModalOpen: boolean
     setOpenModal: (status: boolean) => void
 }
-export const Selected = ({ selected, isFav, isModalOpen, setOpenModal  }: Props) => {
+export const Selected = ({ isFav, isModalOpen, setOpenModal }: Props) => {
     // const [rawFavs, setRawFavs] = useState<Fav[]>([])
+    const selected: Course | null = useAppSelector((state: RootState) => state.courses.selected)
     const dispatch = useAppDispatch()
 
 
 
     return (<>
-        <div className={style["courses__selected"]}>
+        {selected && <div className={style["courses__selected"]}>
             <div className={style["selected__header"]}>
                 <img src={selected.img} alt="" />{" "}
                 <div className={style["selected__commands"]}>
@@ -32,7 +31,7 @@ export const Selected = ({ selected, isFav, isModalOpen, setOpenModal  }: Props)
                     <button>
                         <BsFillCalendarWeekFill />
                     </button>
-                    <button onClick={() => { void dispatch(toggleFavs(selected._id)) }}>
+                    <button onClick={() => { void dispatch(toggleFavs(selected._id)); }}>
                         {
                             isFav ? <BsBookmarkXFill /> : <BsFillBookmarkFill />
                         }
@@ -52,7 +51,7 @@ export const Selected = ({ selected, isFav, isModalOpen, setOpenModal  }: Props)
                     {selected.description}
                 </div>
             </div>
-        </div>
+        </div>}
 
         {selected && (
             <Modal
