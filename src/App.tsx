@@ -4,7 +4,7 @@ import { Loader } from './pages/Loader/Loader'
 import { Layout } from './pages/RouterLayout/RouterLayout'
 import { fetchCourses, fetchFavs, fetchMe } from './utils/API/index.ts'
 import { Provider } from 'react-redux'
-import { store } from './redux/index.ts'
+import { store, useAppDispatch } from './redux/index.ts'
 
 
 function App() {
@@ -57,17 +57,6 @@ function App() {
           }
         },
         {
-          loader: async () => {
-            try {
-
-              const favs = await fetchFavs()
-              return favs
-
-
-            } catch (error) {
-              console.log(error)
-            }
-          },
           errorElement: <Loader />,
           path: "/favs",
           lazy: async () => {

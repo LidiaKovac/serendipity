@@ -1,9 +1,11 @@
 import { combineReducers, configureStore, Reducer } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import alertSlice from "./slices/alertSlice"
+import favsSlice from "./slices/favsSlice"
 
 const baseReducer = combineReducers({
     alerts: alertSlice,
+    favs: favsSlice
 })
 
 
