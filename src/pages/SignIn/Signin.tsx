@@ -2,9 +2,10 @@ import { FormEvent, useContext } from "react"
 import style from "./Signin.module.scss"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../../components/Button/Button"
-import { ErrorsDispatchContext } from "../../context"
+import { useAppDispatch } from "../../redux"
+import { addAlert } from "../../redux/slices/alertSlice"
 export const Signin = () => {
-  const dispatch = useContext(ErrorsDispatchContext)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const login = (ev: FormEvent) => {
     ev.preventDefault()
@@ -25,10 +26,9 @@ export const Signin = () => {
         navigate("/courses")
       })
       .catch((err: string) => {
-        dispatch({
-          type: "add",
-          status: "danger", text: err, id: `danger_${err.length}`
-        })
+        dispatch(addAlert({
+          status: "danger", text: err
+        }))
       })
   }
 

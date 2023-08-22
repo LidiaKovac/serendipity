@@ -1,13 +1,13 @@
 import { useReducer, Suspense } from 'react'
 import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom"
-import { ErrorsContext, ErrorsDispatchContext, errorsReducer } from './context'
 import { Loader } from './pages/Loader/Loader'
 import { Layout } from './pages/RouterLayout/RouterLayout'
 import { fetchCourses, fetchFavs, fetchMe } from './utils/API/index.ts'
+import { Provider } from 'react-redux'
+import { store } from './redux/index.ts'
 
 
 function App() {
-  const [errors, dispatch] = useReducer(errorsReducer, [])
   const router = createBrowserRouter([
     {
       errorElement: <Loader />,
@@ -32,10 +32,6 @@ function App() {
               return { courses, favs } as { courses: Course[], favs: Course[] }
             } catch (error) {
               if ((error as IError).text === "not logged in") redirect("/login")
-              dispatch({
-                type: "add",
-                ...error as IError,
-              } as ErrorAction)
             }
           },
           path: "/courses",
@@ -61,19 +57,15 @@ function App() {
           }
         },
         {
-          loader:async () => {
+          loader: async () => {
             try {
-              
+
               const favs = await fetchFavs()
               return favs
-              
-              
-            } catch (error) {              
-              dispatch({
-                type: "add",
-                status: (error as IError).status,
-                text: (error as IError).text
-              } as ErrorAction)
+
+
+            } catch (error) {
+              console.log(error)
             }
           },
           errorElement: <Loader />,
@@ -88,14 +80,14 @@ function App() {
     },
   ])
   return (
-    <ErrorsContext.Provider value={errors}>
-      <ErrorsDispatchContext.Provider value={dispatch}>
+
 
         <Suspense fallback={<Loader />}>
+          <Provider store={store}>
           <RouterProvider fallbackElement={<Loader />} router={router} />
+          </Provider>
         </Suspense>
-      </ErrorsDispatchContext.Provider>
-    </ErrorsContext.Provider>
+
   )
 }
 

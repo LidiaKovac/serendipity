@@ -5,6 +5,9 @@ import { FaPlay } from "react-icons/fa"
 import { BsFillCalendarWeekFill, BsFillBookmarkFill, BsBookmarkXFill } from "react-icons/bs"
 import { Modal } from "../../components/Modal/Modal"
 import { fetchFavs } from "../../utils/API"
+import { useContext } from "react"
+import { addAlert } from "../../redux/slices/alertSlice"
+import { useAppDispatch } from "../../redux"
 
 
 interface Props {
@@ -16,6 +19,7 @@ interface Props {
 }
 export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFavs }: Props) => {
     // const [rawFavs, setRawFavs] = useState<Fav[]>([])
+    const dispatch = useAppDispatch()
     const toggleFav = async (): Promise<void> => {
         try {
             const res = await fetch(`${import.meta.env.VITE_API_URL as string}user/favs/${selected._id}`, {
@@ -26,7 +30,12 @@ export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFav
             })
             if (res.ok) {
                 const resFavs = await fetchFavs()
+                dispatch(addAlert({
+                    status: "success", text: isFav ? "Removed from favs" : "Added to favs"
+                  }))
+               
                 updateFavs(resFavs as Course[])
+          
             }
         } catch (error) {
             // return error as IError

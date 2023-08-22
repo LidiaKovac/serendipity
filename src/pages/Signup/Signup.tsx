@@ -2,20 +2,19 @@ import { FormEvent, useContext } from "react"
 import { Button } from "../../components/Button/Button"
 import style from "./Signup.module.scss"
 import { useNavigate } from "react-router-dom"
-import { ErrorsDispatchContext } from "../../context"
+import { useAppDispatch } from "../../redux"
+import { addAlert } from "../../redux/slices/alertSlice"
 export const Signup = () => {
-  const dispatch = useContext(ErrorsDispatchContext)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const submitForm = (ev: FormEvent) => {
     ev.preventDefault()
 
     const fd = new FormData(ev.target as HTMLFormElement)
     if (fd.get("password") !== fd.get("passwordConfirm")) {
-      dispatch({
-        type: "add",
-        status: "danger",
-        text: "Le password sono diverse!",
-      })
+      dispatch(addAlert({
+        status: "danger", text: "Le password non corrispondono"
+      }))
 
       return
     }
@@ -31,10 +30,9 @@ export const Signup = () => {
       })
       .catch((err: IError) => {
         console.log(err)
-        dispatch({
-          type: "add",
-          ...err,
-        })
+        dispatch(addAlert({
+          status: "danger", text: err.text
+        }))
       })
   }
 
