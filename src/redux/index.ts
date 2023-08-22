@@ -2,10 +2,12 @@ import { combineReducers, configureStore, Reducer } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import alertSlice from "./slices/alertSlice"
 import favsSlice from "./slices/favsSlice"
+import courseSlice from "./slices/courseSlice"
 
 const baseReducer = combineReducers({
     alerts: alertSlice,
-    favs: favsSlice
+    favs: favsSlice,
+    courses: courseSlice
 })
 
 
@@ -17,8 +19,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: false,
         }),
-    devTools: import.meta.env.NODE_ENV === 'development'
-    // può esserci solo un valore per reducer nello store
+    // devTools: import.meta.env.NODE_ENV === 'development'
 })
 
 

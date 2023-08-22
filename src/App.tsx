@@ -24,16 +24,7 @@ function App() {
         },
         {
           errorElement: <Loader />,
-          loader: async () => {
-            try {
-              await fetchMe()
-              const courses = await fetchCourses() as Course[]
-              const favs = await fetchFavs() as Course[]
-              return { courses, favs } as { courses: Course[], favs: Course[] }
-            } catch (error) {
-              if ((error as IError).text === "not logged in") redirect("/login")
-            }
-          },
+
           path: "/courses",
           lazy: async () => {
             const { Courses } = await import("./pages/Courses/Courses.tsx")

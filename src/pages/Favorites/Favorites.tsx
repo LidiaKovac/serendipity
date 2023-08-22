@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from "react"
 import style from "./Favorites.module.scss"
 
 import { Selected } from "../../components/Selected/Selected"
-import { useLoaderData } from "react-router-dom"
 import { RootState, useAppDispatch, useAppSelector } from "../../redux"
 import { getFavs } from "../../redux/slices/favsSlice"
 
@@ -16,7 +15,7 @@ export const Favourites = () => {
 
   useEffect(() => {
     void dispatch(getFavs(null))
-  })
+  }, [])
   return (
     <div className={style["courses__wrap"]}>
       <h1>Preferiti</h1>
@@ -35,7 +34,7 @@ export const Favourites = () => {
             />
           ))}
         </div>
-        {selected && <Selected updateFavs={(fvs) => { setSelected(null) }} isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} selected={selected} />}
+        {selected && <Selected isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} selected={selected} />}
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { addAlert } from "./alertSlice"
 const initialState: { favs: Course[] } = {
   favs: [] as Course[]
 }
@@ -33,17 +34,26 @@ export const toggleFavs = createAsyncThunk("favs/toggleFavs", (courseId: string,
         "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
       }
     }).then(res => {
+      console.log(res)
       if (res.ok) {
-        return res.json()
+        return res.text()
       } else {
         throw res.text()
       }
 
-    }).then((favs: Course[]) => res(favs))
+    }).then(() => 
+    dispatch(addAlert({
+      status: "success", 
+      text: "Favourites sucessfully modified."
+    })))
       .then(_ => {
         return dispatch(getFavs(null))
       })
       .catch(err => {
+        dispatch(addAlert({
+          status: "danger", 
+          text: err as string
+        }))
         rej(rejectWithValue(err))
       })
   })
@@ -59,9 +69,9 @@ const alertSlice = createSlice({
   reducers: {
   },
   extraReducers: (builder) => {
-    // builder.addCase(toggleFavs.fulfilled, (state,action) => {
-    //   state.favs = action.payload
-    // })
+    builder.addCase(toggleFavs.fulfilled, (state,action) => {
+      state.favs = action.payload
+    })
     builder.addCase(getFavs.fulfilled, (state,action)=> {
       state.favs = action.payload
     })

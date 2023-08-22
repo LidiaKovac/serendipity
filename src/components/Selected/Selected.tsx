@@ -4,43 +4,20 @@ import { HiOutlineClock } from "react-icons/hi"
 import { FaPlay } from "react-icons/fa"
 import { BsFillCalendarWeekFill, BsFillBookmarkFill, BsBookmarkXFill } from "react-icons/bs"
 import { Modal } from "../../components/Modal/Modal"
-import { fetchFavs } from "../../utils/API"
-import { useContext } from "react"
 import { addAlert } from "../../redux/slices/alertSlice"
 import { useAppDispatch } from "../../redux"
+import { toggleFavs } from "../../redux/slices/favsSlice"
 
 
 interface Props {
     selected: Course,
     isFav: boolean
     isModalOpen: boolean
-    updateFavs: (favs: Course[]) => void
     setOpenModal: (status: boolean) => void
 }
-export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFavs }: Props) => {
+export const Selected = ({ selected, isFav, isModalOpen, setOpenModal  }: Props) => {
     // const [rawFavs, setRawFavs] = useState<Fav[]>([])
     const dispatch = useAppDispatch()
-    const toggleFav = async (): Promise<void> => {
-        try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL as string}user/favs/${selected._id}`, {
-                method: "PATCH",
-                headers: {
-                    "authorization": `Bearer ${localStorage.getItem("serendipity-token")!}`
-                }
-            })
-            if (res.ok) {
-                const resFavs = await fetchFavs()
-                dispatch(addAlert({
-                    status: "success", text: isFav ? "Removed from favs" : "Added to favs"
-                  }))
-               
-                updateFavs(resFavs as Course[])
-          
-            }
-        } catch (error) {
-            // return error as IError
-        }
-    }
 
 
 
@@ -55,7 +32,7 @@ export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFav
                     <button>
                         <BsFillCalendarWeekFill />
                     </button>
-                    <button onClick={() => { void toggleFav() }}>
+                    <button onClick={() => { void dispatch(toggleFavs(selected._id)) }}>
                         {
                             isFav ? <BsBookmarkXFill /> : <BsFillBookmarkFill />
                         }
@@ -83,8 +60,8 @@ export const Selected = ({ selected, isFav, isModalOpen, setOpenModal, updateFav
                 selected={selected}
                 isOpen={isModalOpen}
                 close={() => setOpenModal(false)}
-                removeFav={() => { void toggleFav() }}
-                addToFav={() => { void toggleFav() }}
+                removeFav={() => { void dispatch(toggleFavs(selected._id)) }}
+                addToFav={() => { void dispatch(toggleFavs(selected._id)) }}
             />
         )
         }

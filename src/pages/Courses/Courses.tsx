@@ -1,18 +1,22 @@
 import { Card } from "../../components/Card/Card"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import style from "./Courses.module.scss"
-import { useLoaderData } from "react-router-dom"
 import { Selected } from "../../components/Selected/Selected"
+import { RootState, useAppDispatch, useAppSelector } from "../../redux"
+import { getCourses } from "../../redux/slices/courseSlice"
+import { getFavs } from "../../redux/slices/favsSlice"
 
 export const Courses = () => {
-  const { courses, favs: preloadedFavs } = useLoaderData() as { courses: Course[], favs: Course[] }
-  const [favs, setFavs] = useState<Course[]>(preloadedFavs)
+  const { favs: { favs }, courses: { courses } } = useAppSelector((state: RootState) => state)
+  const dispatch = useAppDispatch()
   const [selected, setSelected] = useState<Course | null>(null)
   const [isModalOpen, setOpenModal] = useState<boolean>(true)
 
-
-
+  useEffect(() => {
+    void dispatch(getCourses(null))
+    void dispatch(getFavs(null))
+  }, [])
 
   return (
 
@@ -32,7 +36,7 @@ export const Courses = () => {
             />
           ))}
         </div>
-        {selected && <Selected updateFavs={(fvs) => setFavs(fvs)} isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} selected={selected} />}
+        {selected && <Selected  isModalOpen={isModalOpen} setOpenModal={setOpenModal} isFav={favs.some(fav => fav._id === selected._id)} selected={selected} />}
       </div>
     </div>
   )

@@ -25,14 +25,18 @@ export const Alert = ({ err }: { err: IError }) => {
                 break;
         }
     }, [err.status])
-
+    useEffect(()=> {
+        setTimeout(()=> {
+            dispatch(removeAlert(err.id!))
+        }, 5000)
+    }, [])
     return (
         <div className={styles[`alert--${err.status}`]}>
             {icon} {err.text}
             <span
                 onClick={() => {
                     dispatch(removeAlert(err.id!))
-                              }}
+                }}
             >
                 <VscChromeClose className={styles['alert__close']} />
             </span>
