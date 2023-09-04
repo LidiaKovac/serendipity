@@ -1,4 +1,4 @@
-import { FormEvent, useContext } from "react"
+import { FormEvent } from "react"
 import { Button } from "../../components/Button/Button"
 import style from "./Signup.module.scss"
 import { useNavigate } from "react-router-dom"
